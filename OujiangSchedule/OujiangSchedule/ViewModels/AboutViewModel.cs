@@ -8,7 +8,11 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 		public AboutViewModel(){
 			Title="About";
 
-			OpenWebCommand=new Command(()=>Device.OpenUri(new Uri("https://xamarin.com/platform")));
+			OpenWebCommand=new Command(async ()=>{
+				Console.WriteLine("Hello!");
+				await Tianhai.OujiangApp.Schedule.Services.ScheduleService.fetchCurrent("demo");
+				return;
+			});
 		}
 
 		public ICommand OpenWebCommand{get;}
