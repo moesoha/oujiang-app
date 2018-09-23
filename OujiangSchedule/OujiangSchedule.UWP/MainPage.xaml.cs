@@ -13,15 +13,12 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace OujiangSchedule.UWP
-{
-    public sealed partial class MainPage
-    {
-        public MainPage()
-        {
-            this.InitializeComponent();
+namespace Tianhai.OujiangApp.Schedule.UWP{
+	public sealed partial class MainPage{
+		public MainPage(){
+			this.InitializeComponent();
 
-            LoadApplication(new OujiangSchedule.App());
-        }
-    }
+			LoadApplication(new Tianhai.OujiangApp.Schedule.App());
+		}
+	}
 }

@@ -7,8 +7,8 @@
     <ProjectGuid>{87F67090-D2EC-48BB-A1A9-92C0C7AC27C8}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OujiangSchedule.UWP</RootNamespace>
-    <AssemblyName>OujiangSchedule.UWP</AssemblyName>
+    <RootNamespace>Tianhai.OujiangApp.Schedule.UWP</RootNamespace>
+    <AssemblyName>Tianhai.OujiangApp.Schedule.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
@@ -151,7 +151,7 @@
   <ItemGroup>
     <ProjectReference Include="..\OujiangSchedule\OujiangSchedule.csproj">
       <Project>{50F9F003-56E7-44DC-A5FB-199BAF251C0F}</Project>
-      <Name>OujiangSchedule</Name>
+      <Name>Tianhai.OujiangApp.Schedule</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

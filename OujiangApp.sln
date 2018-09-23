@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OujiangSchedule.Android", "OujiangSchedule\OujiangSchedule.Android\OujiangSchedule.Android.csproj", "{00525A0D-1E74-4734-B3D7-F0191AEF84DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tianhai.OujiangApp.Schedule.Android", "OujiangSchedule\OujiangSchedule.Android\OujiangSchedule.Android.csproj", "{00525A0D-1E74-4734-B3D7-F0191AEF84DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OujiangSchedule.iOS", "OujiangSchedule\OujiangSchedule.iOS\OujiangSchedule.iOS.csproj", "{725BEA4B-127C-4064-A0F3-07B756E396DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tianhai.OujiangApp.Schedule.iOS", "OujiangSchedule\OujiangSchedule.iOS\OujiangSchedule.iOS.csproj", "{725BEA4B-127C-4064-A0F3-07B756E396DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OujiangSchedule.UWP", "OujiangSchedule\OujiangSchedule.UWP\OujiangSchedule.UWP.csproj", "{87F67090-D2EC-48BB-A1A9-92C0C7AC27C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tianhai.OujiangApp.Schedule.UWP", "OujiangSchedule\OujiangSchedule.UWP\OujiangSchedule.UWP.csproj", "{87F67090-D2EC-48BB-A1A9-92C0C7AC27C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OujiangSchedule", "OujiangSchedule\OujiangSchedule\OujiangSchedule.csproj", "{0EE2F9FD-D16C-414E-944A-603EFBE1BEC6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tianhai.OujiangApp.Schedule", "OujiangSchedule\OujiangSchedule\OujiangSchedule.csproj", "{0EE2F9FD-D16C-414E-944A-603EFBE1BEC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
