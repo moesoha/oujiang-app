@@ -8,7 +8,7 @@ using Android.Widget;
 using Android.OS;
 
 namespace Tianhai.OujiangApp.Schedule.Droid{
-	[Activity(Label="OujiangSchedule",Icon="@mipmap/icon",Theme="@style/MainTheme",MainLauncher=true,ConfigurationChanges=ConfigChanges.ScreenSize|ConfigChanges.Orientation)]
+	[Activity(Label="瓯江课表",Icon="@mipmap/icon",Theme="@style/MainTheme",MainLauncher=true,ConfigurationChanges=ConfigChanges.ScreenSize|ConfigChanges.Orientation)]
 	public class MainActivity:global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity{
 		protected override void OnCreate(Bundle savedInstanceState){
 			TabLayoutResource=Resource.Layout.Tabbar;

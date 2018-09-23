@@ -6,15 +6,15 @@ using Xamarin.Forms;
 namespace Tianhai.OujiangApp.Schedule.ViewModels{
 	public class AboutViewModel:BaseViewModel{
 		public AboutViewModel(){
-			Title="About";
+			Title="设置";
 
-			OpenWebCommand=new Command(async ()=>{
-				Console.WriteLine("Hello!");
-				await Tianhai.OujiangApp.Schedule.Services.ScheduleService.fetchCurrent("demo");
+			RefreshScheduleCommand=new Command(async ()=>{
+				
+				await Tianhai.OujiangApp.Schedule.Services.ScheduleService.GetCurrentLessons();
 				return;
 			});
 		}
 
-		public ICommand OpenWebCommand{get;}
+		public ICommand RefreshScheduleCommand{get;}
 	}
 }

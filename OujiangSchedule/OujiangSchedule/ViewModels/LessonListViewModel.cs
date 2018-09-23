@@ -27,8 +27,8 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 			IsBusy=true;
 			try{
 				Lessons.Clear();
-				var lessons=await Services.ScheduleService.fetchCurrent("demo");
-				lessons.Lessons.ForEach(o=>{
+				var lessons=await Services.ScheduleService.GetCurrentLessons();
+				lessons.ForEach(o=>{
 					Lessons.Add(o);
 				});
 			}catch(Exception ex){
