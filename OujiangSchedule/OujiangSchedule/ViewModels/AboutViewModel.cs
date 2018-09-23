@@ -9,12 +9,24 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 			Title="设置";
 
 			RefreshScheduleCommand=new Command(async ()=>{
-				
-				await Tianhai.OujiangApp.Schedule.Services.ScheduleService.GetCurrentLessons();
+				this.btnRefreshScheduleIsEnabled=false;
+				await Services.ScheduleService.RefreshCurrentLessons();
+				this.btnRefreshScheduleIsEnabled=true;
 				return;
 			});
 		}
 
 		public ICommand RefreshScheduleCommand{get;}
+
+		private bool _btnRefreshScheduleIsEnabled=true;
+		public bool btnRefreshScheduleIsEnabled{
+			get{
+				return _btnRefreshScheduleIsEnabled;
+			}
+			set{
+				_btnRefreshScheduleIsEnabled=value;
+				OnPropertyChanged();
+			}
+		}
 	}
 }

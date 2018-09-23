@@ -18,22 +18,21 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 			}
 		}
 
-		public static async Task<List<Models.Lesson>> GetCurrentLessons(){
-			Console.WriteLine("Start GCL()");
-			var lessons=await App.CurrentInfoDatabase.GetAsync();
-			Console.WriteLine("GCL: ReadDB Finish!");
-			if(lessons.Count==0){
-				Console.WriteLine("GCL: count==0");
-				Models.Schedule schedule=await fetchCurrent("demo");
-				Console.WriteLine("GCL: Fetch through Web!");
-				if(schedule!=null){
-					App.CurrentInfoDatabase.ResetAsync(schedule.Lessons);
-					return schedule.Lessons;
-				}else{
-					return null;
-				}
+		public static async Task<List<Models.Lesson>> RefreshCurrentLessons(){
+			Models.Schedule schedule=await fetchCurrent("demo");
+			if(schedule!=null){
+				App.CurrentInfoDatabase.ResetAsync(schedule.Lessons);
+				return schedule.Lessons;
 			}else{
-				Console.WriteLine("GCL: count!=0");
+				return null;
+			}
+		}
+
+		public static async Task<List<Models.Lesson>> GetCurrentLessons(){
+			var lessons=await App.CurrentInfoDatabase.GetAsync();
+			if(lessons.Count==0){
+				return await RefreshCurrentLessons();
+			}else{
 				return lessons;
 			}
 		}

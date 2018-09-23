@@ -25,9 +25,7 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 		protected override void OnAppearing(){
 			base.OnAppearing();
 
-			if(viewModel.Lessons.Count==0){
-				viewModel.LoadLessonsCommand.Execute(null);
-			}
+			viewModel.LoadLessonsCommand.Execute(null);
 		}
 	}
 }
