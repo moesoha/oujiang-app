@@ -12,11 +12,20 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 	public class LessonListViewModel:BaseViewModel{
 		public ObservableCollection<Models.Lesson> Lessons{get;set;}
 		public Command LoadLessonsCommand{get;set;}
+		
+		public DateTime currentWeek_Sunday;
+		public Enums.WeekType currentWeek_Type{
+			get{
+				return Enums.WeekType.Even; // for testing
+			}
+		}
 
 		public LessonListViewModel(){
-			Title="课程列表";
+			Title="课程表";
 			Lessons=new ObservableCollection<Models.Lesson>();
 			LoadLessonsCommand=new Command(async ()=>await ExecuteLoadCommand());
+
+			currentWeek_Sunday=DateTime.Now.Subtract(new TimeSpan((int)DateTime.Now.DayOfWeek,0,0,0));
 		}
 
 		async Task ExecuteLoadCommand(){

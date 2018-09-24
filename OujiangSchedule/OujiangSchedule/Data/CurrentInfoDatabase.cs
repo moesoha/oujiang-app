@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SQLiteNetExtensionsAsync.Extensions;
 using SQLite;
 
 namespace Tianhai.OujiangApp.Schedule.Data{
 	public class CurrentInfoDatabase{
+
 		readonly SQLiteAsyncConnection db;
 
 		public CurrentInfoDatabase(string dbPath){
@@ -13,12 +15,12 @@ namespace Tianhai.OujiangApp.Schedule.Data{
 		}
 
 		public Task<List<Models.Lesson>> GetAsync(){
-			return db.Table<Models.Lesson>().ToListAsync();
+			return db.GetAllWithChildrenAsync<Models.Lesson>();
 		}
 		
 		public async void ResetAsync(List<Models.Lesson> lessons){
 			await db.DeleteAllAsync<Models.Lesson>();
-			await db.InsertAllAsync(lessons);
+			await db.InsertAllWithChildrenAsync(lessons);
 			return;
 		}
 	}

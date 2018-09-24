@@ -21,7 +21,7 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 
 			BindingContext=viewModel=new ItemsViewModel();
 		}
-
+		
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs args){
 			var item=args.SelectedItem as Item;
 			if(item==null){

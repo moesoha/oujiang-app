@@ -17,6 +17,7 @@ namespace Tianhai.OujiangApp.Schedule{
 		public static Data.CurrentInfoDatabase CurrentInfoDatabase{
 			get{
 				if(currentInfoDatabase==null){
+					Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 					currentInfoDatabase=new Data.CurrentInfoDatabase(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"CurrentInfo.db"));
 				}
 				return currentInfoDatabase;

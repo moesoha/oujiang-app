@@ -1,22 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Tianhai.OujiangApp.Schedule.Views.LessonListPage" Title="{Binding Title}" x:Name="ListPage">
 	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="上周" Clicked="PrevWeek_Clicked">
+			<ToolbarItem.Icon>
+				<OnPlatform x:TypeArguments="FileImageSource">
+					<On Platform="UWP" Value="add.png"/> <!-- !!! -->
+				</OnPlatform>
+			</ToolbarItem.Icon>
+		</ToolbarItem>
+		<ToolbarItem Text="下周" Clicked="NextWeek_Clicked">
+			<ToolbarItem.Icon>
+				<OnPlatform x:TypeArguments="FileImageSource">
+					<On Platform="UWP" Value="add.png"/> <!-- !!! -->
+				</OnPlatform>
+			</ToolbarItem.Icon>
+		</ToolbarItem>
 	</ContentPage.ToolbarItems>
-	<ContentPage.Content>
-		<StackLayout>
-			<ListView x:Name="LessonListView" ItemsSource="{Binding Lessons}" VerticalOptions="FillAndExpand" HasUnevenRows="true" RefreshCommand="{Binding LoadLessonsCommand}" IsPullToRefreshEnabled="false" IsRefreshing="{Binding IsBusy, Mode=OneWay}" CachingStrategy="RecycleElement">
-				<ListView.ItemTemplate>
-					<DataTemplate>
-						<ViewCell>
-							<StackLayout Padding="10">
-								<Label Text="{Binding Name}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
-								<Label Text="{Binding Teacher}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
-								<Label Text="{Binding Place}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="11" />
-							</StackLayout>
-						</ViewCell>
-					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
-		</StackLayout>
-	</ContentPage.Content>
 </ContentPage>

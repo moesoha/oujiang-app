@@ -5,13 +5,19 @@ using SQLite;
 
 namespace Tianhai.OujiangApp.Schedule.Models{
     public class Lesson{
+		[PrimaryKey,AutoIncrement]
+		public int Id { get; set; }
         public string Name { get; set; }
         public string Teacher { get; set; }
         public string Place { get; set; }
 		public DayOfWeek Day { get; set; }
-		[OneToMany(CascadeOperations=CascadeOperation.All)]
+		[TextBlob("TextBlobSession")]
 		public List<int> Session { get; set; }
-		[OneToOne]
+		[TextBlob("TextBlobWeek")]
 		public LessonWeek Week { get; set; }
+
+		// for TextBlob
+		public string TextBlobSession { get; set; }
+		public string TextBlobWeek { get; set; }
     }
 }
