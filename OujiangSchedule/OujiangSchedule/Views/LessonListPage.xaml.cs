@@ -72,11 +72,17 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 					Padding=new Thickness(6),
 					FontSize=11
 				};
+				thisButton.BindingContext=o;
+				thisButton.Clicked+=this.ThisButton_Clicked;
 				oGrid.Children.Add(thisButton,(int)o.Day,sessionStart+1);
 				Grid.SetRowSpan(thisButton,sessionSpan);
 			}
 
 			return oGrid;
+		}
+
+		private async void ThisButton_Clicked(object sender,EventArgs e){
+			await Navigation.PushAsync(new LessonDetailPage(new LessonDetailViewModel((Models.Lesson)(((Button)sender).BindingContext))));
 		}
 
 		private Grid CreateWeekGrid(DateTime sunday){
