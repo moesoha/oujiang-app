@@ -14,9 +14,10 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 		public Command LoadLessonsCommand{get;set;}
 		
 		public DateTime currentWeek_Sunday;
+		public int currentWeek_Number=3;
 		public Enums.WeekType currentWeek_Type{
 			get{
-				return Enums.WeekType.Even; // for testing
+				return Enums.WeekType.Odd; // for testing
 			}
 		}
 

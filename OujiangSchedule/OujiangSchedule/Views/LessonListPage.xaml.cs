@@ -35,14 +35,22 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 							Console.WriteLine("NULL! {0}",o.Name);
 							continue;
 						}
-						int sessionSpan=Math.Abs(o.Session.Max()-o.Session.Min());
+						if(o.Week.Type!=Enums.WeekType.Undefined && o.Week.Type!=viewModel.currentWeek_Type){
+							continue;
+						} // 不是全周/当前的单双周
+						if(o.Week.Start>viewModel.currentWeek_Number || viewModel.currentWeek_Number>o.Week.End){
+							continue;
+						} // 不在上课周范围内
+						int sessionSpan=Math.Abs(o.Session.Max()-o.Session.Min())+1;
 						int sessionStart=o.Session.Min();
 
 						var thisButton=new Button{
-							Text=o.Name
+							Text=String.Format("{0}\n{1}",o.Name,o.Place),
+							Padding=new Thickness(6),
+							FontSize=11
 						};
 						gridNow.Children.Add(thisButton,(int)o.Day,sessionStart+1);
-						Grid.SetColumnSpan(thisButton,sessionSpan);
+						Grid.SetRowSpan(thisButton,sessionSpan);
 					}
 					break;
 			}
