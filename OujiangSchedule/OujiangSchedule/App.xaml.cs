@@ -7,6 +7,7 @@ using Tianhai.OujiangApp.Schedule.Views;
 namespace Tianhai.OujiangApp.Schedule{
 	public partial class App:Application{
 		static Data.CurrentInfoDatabase currentInfoDatabase;
+		static Data.PreferenceDatabase preferenceDatabase;
 
 		public App(){
 			InitializeComponent();
@@ -17,10 +18,17 @@ namespace Tianhai.OujiangApp.Schedule{
 		public static Data.CurrentInfoDatabase CurrentInfoDatabase{
 			get{
 				if(currentInfoDatabase==null){
-					Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 					currentInfoDatabase=new Data.CurrentInfoDatabase(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"CurrentInfo.db"));
 				}
 				return currentInfoDatabase;
+			}
+		}
+		public static Data.PreferenceDatabase PreferenceDatabase{
+			get{
+				if(preferenceDatabase==null){
+					preferenceDatabase=new Data.PreferenceDatabase(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"Preference.db"));
+				}
+				return preferenceDatabase;
 			}
 		}
 

@@ -43,8 +43,4 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\Preferences\" />
-  </ItemGroup>
 </Project>

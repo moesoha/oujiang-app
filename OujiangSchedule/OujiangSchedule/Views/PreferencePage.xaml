@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Tianhai.OujiangApp.Schedule.Views.PreferencePage" xmlns:vm="clr-namespace:Tianhai.OujiangApp.Schedule.ViewModels" Title="{Binding Title}" x:Name="pagePreference">
+	<ContentPage.Content>
+		<ScrollView>
+			<StackLayout Orientation="Vertical" Padding="16,40,16,40" Spacing="10">
+				<StackLayout Spacing="3">
+					<Label FontSize="12" Text="这周是本学期第几周" />
+					<Entry x:Name="currentWeekNumber" Keyboard="Numeric" Completed="currentWeekNumber_Completed" TextChanged="currentWeekNumber_TextChanged" MaxLength="2"></Entry>
+				</StackLayout>
+			</StackLayout>
+		</ScrollView>
+	</ContentPage.Content>
+</ContentPage>

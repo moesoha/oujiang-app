@@ -11,6 +11,7 @@ using Tianhai.OujiangApp.Schedule.Services;
 namespace Tianhai.OujiangApp.Schedule.ViewModels{
 	public class BaseViewModel:INotifyPropertyChanged{
 		public IDataStore<Item> DataStore=>DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
+		public PreferenceService PreferenceService=new PreferenceService();
 
 		bool isBusy=false;
 		public bool IsBusy{

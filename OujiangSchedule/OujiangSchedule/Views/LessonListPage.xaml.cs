@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using Tianhai.OujiangApp.Schedule.Models;
-using Tianhai.OujiangApp.Schedule.Views;
 using Tianhai.OujiangApp.Schedule.ViewModels;
 
 namespace Tianhai.OujiangApp.Schedule.Views{
@@ -30,28 +25,7 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 					gridNow=CreateWeekGrid(viewModel.currentWeek_Sunday);
 					break;
 				case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
-					foreach(Models.Lesson o in e.NewItems){
-						if(o.Session==null){
-							Console.WriteLine("NULL! {0}",o.Name);
-							continue;
-						}
-						if(o.Week.Type!=Enums.WeekType.Undefined && o.Week.Type!=viewModel.currentWeek_Type){
-							continue;
-						} // 不是全周/当前的单双周
-						if(o.Week.Start>viewModel.currentWeek_Number || viewModel.currentWeek_Number>o.Week.End){
-							continue;
-						} // 不在上课周范围内
-						int sessionSpan=Math.Abs(o.Session.Max()-o.Session.Min())+1;
-						int sessionStart=o.Session.Min();
-
-						var thisButton=new Button{
-							Text=String.Format("{0}\n{1}",o.Name,o.Place),
-							Padding=new Thickness(6),
-							FontSize=11
-						};
-						gridNow.Children.Add(thisButton,(int)o.Day,sessionStart+1);
-						Grid.SetRowSpan(thisButton,sessionSpan);
-					}
+					gridNow=InsertLessons(gridNow,e.NewItems);
 					break;
 			}
 			this.Content=gridNow;
@@ -64,12 +38,45 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 			viewModel.LoadLessonsCommand.Execute(null);
 		}
 
-		async void PrevWeek_Clicked(object sender, EventArgs e){
-			//await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+		void PrevWeek_Clicked(object sender, EventArgs e){
+			viewModel.currentWeek_Number--;
+			RefreshTable();
 		}
 
-		async void NextWeek_Clicked(object sender, EventArgs e){
-			//await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+		void NextWeek_Clicked(object sender, EventArgs e){
+			viewModel.currentWeek_Number++;
+			RefreshTable();
+		}
+
+		private void RefreshTable(){
+			this.Content=gridNow=InsertLessons(CreateWeekGrid(viewModel.currentWeek_Sunday),viewModel.Lessons);
+		}
+
+		private Grid InsertLessons(Grid oGrid, System.Collections.IList lessons){
+			foreach(Models.Lesson o in lessons){
+				if(o.Session==null){
+					Console.WriteLine("NULL! {0}",o.Name);
+					continue;
+				}
+				if(o.Week.Type!=Enums.WeekType.Undefined && o.Week.Type!=viewModel.currentWeek_Type){
+					continue;
+				} // 不是全周/当前的单双周
+				if(o.Week.Start>viewModel.currentWeek_Number || o.Week.End<viewModel.currentWeek_Number){
+					continue;
+				} // 不在上课周范围内
+
+				int sessionSpan=Math.Abs(o.Session.Max()-o.Session.Min())+1;
+				int sessionStart=o.Session.Min();
+				var thisButton=new Button{
+					Text=String.Format("{0}\n{1}",o.Name,o.Place),
+					Padding=new Thickness(6),
+					FontSize=11
+				};
+				oGrid.Children.Add(thisButton,(int)o.Day,sessionStart+1);
+				Grid.SetRowSpan(thisButton,sessionSpan);
+			}
+
+			return oGrid;
 		}
 
 		private Grid CreateWeekGrid(DateTime sunday){
