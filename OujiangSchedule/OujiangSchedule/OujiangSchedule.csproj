@@ -6,6 +6,9 @@
     <Authors>Soha Jin</Authors>
     <Company>Tianhai Information Technology</Company>
     <Product>Oujiang Schedule</Product>
+    <RootNamespace>Tianhai.OujiangApp.Schedule</RootNamespace>
+    <AssemblyName>Tianhai.OujiangApp.Schedule.Base</AssemblyName>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
