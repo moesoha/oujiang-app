@@ -29,7 +29,7 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 		}
 
 		public int DateTime_WeekNumber(DateTime dt){
-			return (int)Math.Ceiling(((dt-Display_FirstWeek_Sunday).Days)/7.0);
+			return (int)Math.Ceiling(((dt-Display_FirstWeek_Sunday).Days+1)/7.0);
 		}
 
 		public DateTime WeekNumber_DateTime(int wn){
