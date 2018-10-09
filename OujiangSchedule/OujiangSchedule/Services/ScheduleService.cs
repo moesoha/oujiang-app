@@ -19,7 +19,11 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 		}
 
 		public static async Task<List<Models.Lesson>> RefreshCurrentLessons(){
-			Models.Schedule schedule=await fetchCurrent("demo");
+			Models.Preferences.Token token=await App.PreferenceDatabase.GetToken();
+			if(token==null){
+				throw new Exceptions.SessionTimeoutException();
+			}
+			Models.Schedule schedule=await fetchCurrent(token.AccessToken);
 			if(schedule!=null){
 				App.CurrentInfoDatabase.ResetAsync(schedule.Lessons);
 				return schedule.Lessons;
@@ -29,12 +33,7 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 		}
 
 		public static async Task<List<Models.Lesson>> GetCurrentLessons(){
-			var lessons=await App.CurrentInfoDatabase.GetAsync();
-			if(lessons.Count==0){
-				return await RefreshCurrentLessons();
-			}else{
-				return lessons;
-			}
+			return await App.CurrentInfoDatabase.GetAsync();
 		}
 	}
 }

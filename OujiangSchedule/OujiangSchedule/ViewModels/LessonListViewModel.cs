@@ -58,9 +58,13 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 
 				Lessons.Clear();
 				var lessons=await Services.ScheduleService.GetCurrentLessons();
-				lessons.ForEach(o=>{
-					Lessons.Add(o);
-				});
+				if(lessons.Count>0){
+					lessons.ForEach(o=>{
+						Lessons.Add(o);
+					});
+				}else{
+					//alert
+				}
 			}catch(Exception ex){
 				Debug.WriteLine(ex);
 			}finally{

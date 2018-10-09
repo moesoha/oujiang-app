@@ -12,6 +12,7 @@ namespace Tianhai.OujiangApp.Schedule.Data{
 		public PreferenceDatabase(string dbPath){
 			db=new SQLiteAsyncConnection(dbPath);
 			db.CreateTableAsync<Models.Preferences.Display>().Wait();
+			db.CreateTableAsync<Models.Preferences.Token>().Wait();
 		}
 
 		public async Task SetDisplay_FirstWeek_Sunday(DateTime fws){
@@ -41,6 +42,27 @@ namespace Tianhai.OujiangApp.Schedule.Data{
 				display=displays[0];
 			}
 			return display.FirstWeek_Sunday;
+		}
+
+		public async Task<Models.Preferences.Token> GetToken(){
+			List<Models.Preferences.Token> tokens=await db.GetAllWithChildrenAsync<Models.Preferences.Token>();
+			Models.Preferences.Token token=null;
+			if(tokens==null || tokens.Count<=0 || tokens[0].ValidBefore<=DateTime.Now){
+				//token=new Models.Preferences.Token();
+				//await db.InsertWithChildrenAsync(token);
+				await db.DeleteAllAsync<Models.Preferences.Token>();
+			}else{
+				token=tokens[0];
+			}
+			return token;
+		}
+
+		public async Task SetToken(Models.Preferences.Token token){
+			await db.InsertOrReplaceWithChildrenAsync(token);
+		}
+
+		public async Task RemoveToken(){
+			await db.DeleteAllAsync<Models.Preferences.Token>();
 		}
 	}
 }
