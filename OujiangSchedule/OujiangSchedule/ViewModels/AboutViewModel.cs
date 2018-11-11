@@ -13,7 +13,7 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 			RefreshScheduleCommand=new Command(async ()=>{
 				this.btnRefreshScheduleIsEnabled=false;
 				Models.Preferences.Token token=await App.PreferenceDatabase.GetToken();
-				if(token==null){
+				if(token==null || !token.IsLoggedIn){
 					await Navigation.PushAsync(new Views.LoginPage());
 				}else{
 					await Services.ScheduleService.RefreshCurrentLessons();
