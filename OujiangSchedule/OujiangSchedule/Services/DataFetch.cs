@@ -10,9 +10,9 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 
 		public static async Task<Models.GeneralReturn<T>> get<T>(string url){
 			var response=await client.GetAsync(url);
-			
 			if(response!=null){
 				string json=response.Content.ReadAsStringAsync().Result;
+				Console.WriteLine(json);
 				return JsonConvert.DeserializeObject<Models.GeneralReturn<T>>(json);
 			}else{
 				return null;

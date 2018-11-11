@@ -11,28 +11,13 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 		public LoginPage(){
 			InitializeComponent();
 
-			BindingContext=viewModel=new ViewModels.LoginViewModel();
+			BindingContext=viewModel=new ViewModels.LoginViewModel(Content,Navigation);
 		}
-		
-		private bool _btnLoginIsEnabled=true;
-		public bool btnLoginIsEnabled{
-			get{
-				return _btnLoginIsEnabled;
-			}
-			set{
-				_btnLoginIsEnabled=value;
-				OnPropertyChanged();
-			}
-		}
-		private bool _actidctIsRunning=false;
-		public bool actidctIsRunning{
-			get{
-				return _actidctIsRunning;
-			}
-			set{
-				_actidctIsRunning=value;
-				OnPropertyChanged();
-			}
+
+		protected override async void OnAppearing(){
+			base.OnAppearing();
+
+			await viewModel.LoadCaptcha();
 		}
 	}
 }

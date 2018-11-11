@@ -10,7 +10,7 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 		}
 
 		public static async Task<Models.Schedule> fetchCurrent(string token){
-			Models.GeneralReturn<Models.Schedule> result=await DataFetch.get<Models.Schedule>(String.Format(urlGetScheduleCurrent,urlBase,token));
+			Models.GeneralReturn<Models.Schedule> result=await DataFetch.post<Models.Schedule>(String.Format(urlGetScheduleCurrent,urlBase,token),new Dictionary<string,string>{});
 			if(result.Status==200){
 				return result.Data;
 			}else{

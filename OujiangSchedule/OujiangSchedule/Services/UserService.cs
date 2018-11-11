@@ -28,7 +28,11 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 			if(token==null){
 				throw new Exceptions.SessionTimeoutException();
 			}
-			Models.GeneralReturn<Models.Responses.UserLoginSubmit> result=await DataFetch.post<Models.Responses.UserLoginSubmit>(String.Format(urlUserLoginSubmit,urlBase,token.AccessToken));
+			Models.GeneralReturn<Models.Responses.UserLoginSubmit> result=await DataFetch.post<Models.Responses.UserLoginSubmit>(String.Format(urlUserLoginSubmit,urlBase,token.AccessToken),new Dictionary<string,string>{
+				{ "username", username },
+				{ "password", password },
+				{ "captcha", captcha }
+			});
 			if(result.Status==200){
 				if(result.Data.Success){
 					token.IsLoggedIn=true;

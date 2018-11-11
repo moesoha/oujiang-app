@@ -13,6 +13,9 @@
 				<Label FontSize="Large">
 					登入瓯江学院教务系统
 				</Label>
+				<StackLayout Spacing="3" IsVisible="{Binding lblHintVisible}">
+					<Label FontSize="13" TextColor="IndianRed" HorizontalTextAlignment="Center" Text="{Binding lblHintText}" />
+				</StackLayout>
 				<StackLayout Spacing="3">
 					<Label FontSize="12" Text="用户名(学号)" />
 					<Entry x:Name="username" />
@@ -22,16 +25,29 @@
 					<Entry x:Name="password" IsPassword="True" />
 				</StackLayout>
 				<StackLayout Spacing="3">
-					<Image Source="{Binding imgCaptcha}" />
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+						<Image Source="{Binding imgCaptcha}" Grid.Row="0" Grid.Column="0" />
+						<Button Command="{Binding ReloadCaptchaCommand}" IsEnabled="{Binding btnReloadCaptchaIsEnabled}" Grid.Row="0" Grid.Column="1" Text="{Binding btnReloadCaptchaText}" />
+					</Grid>
+					
 					<Label FontSize="12" Text="验证码" />
 					<Entry x:Name="captcha" />
 				</StackLayout>
-				<Button Margin="0,10,0,0" Command="{Binding LoginCommand}" IsEnabled="{Binding btnLoginIsEnabled}" BackgroundColor="{StaticResource Primary}" TextColor="White">
-					<Button.Text>
-						登入
-					</Button.Text>
-				</Button>
-				<ActivityIndicator IsRunning="True" />
+				<StackLayout Spacing="3">
+					<Button Margin="0,10,0,0" Command="{Binding LoginCommand}" IsEnabled="{Binding btnLoginIsEnabled}" BackgroundColor="{StaticResource Primary}" TextColor="White">
+						<Button.Text>
+							登入
+						</Button.Text>
+					</Button>
+					<ActivityIndicator IsRunning="{Binding actidctIsRunning}" />
+				</StackLayout>
 			</StackLayout>
 		</ScrollView>
 	</ContentPage.Content>
