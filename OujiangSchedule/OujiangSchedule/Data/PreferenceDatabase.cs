@@ -13,6 +13,7 @@ namespace Tianhai.OujiangApp.Schedule.Data{
 			db=new SQLiteAsyncConnection(dbPath);
 			db.CreateTableAsync<Models.Preferences.Display>().Wait();
 			db.CreateTableAsync<Models.Preferences.Token>().Wait();
+			db.CreateTableAsync<Models.Preferences.OACredential>().Wait();
 		}
 
 		public async Task SetDisplay_FirstWeek_Sunday(DateTime fws){
@@ -63,6 +64,23 @@ namespace Tianhai.OujiangApp.Schedule.Data{
 
 		public async Task RemoveToken(){
 			await db.DeleteAllAsync<Models.Preferences.Token>();
+		}
+
+		public async Task<Models.Preferences.OACredential> GetOACredential(){
+			var result=await db.GetAllWithChildrenAsync<Models.Preferences.OACredential>();
+			if(result==null || result.Count<=0){
+				return null;
+			}else{
+				return result[0];
+			}
+		}
+
+		public async Task SetOACredential(Models.Preferences.OACredential credential){
+			await db.InsertOrReplaceWithChildrenAsync(credential);
+		}
+
+		public async Task RemoveOACredential(){
+			await db.DeleteAllAsync<Models.Preferences.OACredential>();
 		}
 	}
 }

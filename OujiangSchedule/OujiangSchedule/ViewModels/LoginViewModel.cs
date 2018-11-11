@@ -18,6 +18,7 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 
 				bool r=await Login(username,password,captcha);
 				if(r){
+					await SaveCredential(PageContent);
 					await Navigation.PopAsync();
 				}
 				return;
@@ -25,6 +26,23 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 			ReloadCaptchaCommand=new Command(async ()=>await LoadCaptcha());
 		}
 		
+		public async Task LoadSavedCredential(View PageContent){
+			var savedCredential=await App.PreferenceDatabase.GetOACredential();
+			if(savedCredential==null){
+				return;
+			}
+			PageContent.FindByName<Entry>("username").Text=savedCredential.Username;
+			PageContent.FindByName<Entry>("password").Text=savedCredential.Password;
+		}
+		
+		public async Task SaveCredential(View PageContent){
+			var savedCredential=new Models.Preferences.OACredential{
+				Username=PageContent.FindByName<Entry>("username").Text,
+				Password=PageContent.FindByName<Entry>("password").Text
+			};
+			await App.PreferenceDatabase.SetOACredential(savedCredential);
+		}
+
 		public async Task LoadCaptcha(){
 			lblHintVisible=false;
 			btnReloadCaptchaIsEnabled=false;
@@ -60,7 +78,7 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 					lblHintText="登陆成功";
 					lblHintVisible=true;
 				}
-			}catch(Exceptions.SessionTimeoutException ste){
+			}catch(Exceptions.SessionTimeoutException){
 				lblHintText="验证码过期，请刷新。";
 				lblHintVisible=true;
 			}catch(Exception e){
