@@ -11,7 +11,7 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 		public LoginPage(){
 			InitializeComponent();
 
-			BindingContext=viewModel=new ViewModels.LoginViewModel(Content,Navigation);
+			BindingContext=viewModel=new ViewModels.LoginViewModel(Content,Navigation,this);
 		}
 
 		protected override async void OnAppearing(){

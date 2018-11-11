@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Tianhai.OujiangApp.Schedule.ViewModels{
 	public class LoginViewModel:BaseViewModel{
-		public LoginViewModel(View PageContent,INavigation Navigation){
+		public LoginViewModel(View PageContent,INavigation Navigation,Page Page){
 			Title="登入";
 
 			LoginCommand=new Command(async ()=>{
@@ -19,6 +19,7 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 				bool r=await Login(username,password,captcha);
 				if(r){
 					await SaveCredential(PageContent);
+					await Page.DisplayAlert("登陆成功","你现在可以去更新课表了。","好的");
 					await Navigation.PopAsync();
 				}
 				return;
