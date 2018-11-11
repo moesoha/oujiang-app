@@ -12,7 +12,6 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 			var response=await client.GetAsync(url);
 			if(response!=null){
 				string json=response.Content.ReadAsStringAsync().Result;
-				Console.WriteLine(json);
 				return JsonConvert.DeserializeObject<Models.GeneralReturn<T>>(json);
 			}else{
 				return null;
