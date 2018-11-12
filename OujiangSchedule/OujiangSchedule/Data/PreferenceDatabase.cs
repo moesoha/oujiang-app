@@ -13,8 +13,19 @@ namespace Tianhai.OujiangApp.Schedule.Data{
 			db.CreateTable<Models.Preferences.Token>();
 			db.CreateTable<Models.Preferences.OACredential>();
 			db.CreateTable<Models.Preferences.TimeSchedule>();
+			db.CreateTable<Models.Preferences.Param>();
+		}
 
-			
+		public int SetParam(string key,string value){
+			return db.InsertOrReplace(new Models.Preferences.Param{
+				Key=key,
+				Value=value
+			});
+		}
+
+		public string GetParam(string key){
+			var r=db.Get<Models.Preferences.Param>(key);
+			return r==null?null:r.Value;
 		}
 
 		public void SetDisplay_FirstWeek_Sunday(DateTime fws){
