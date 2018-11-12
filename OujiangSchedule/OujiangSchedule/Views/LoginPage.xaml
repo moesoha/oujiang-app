@@ -48,6 +48,19 @@
 					</Button>
 					<ActivityIndicator IsRunning="{Binding actidctIsRunning}" />
 				</StackLayout>
+				<StackLayout Spacing="3" Padding="40,0">
+					<Label>
+						<Label.FormattedText>
+							<FormattedString>
+								<FormattedString.Spans>
+									<Span Text="应用需要使用您的教务系统账号来拉取您的课程表，为了避免因为教务系统升级带来的额外的应用升级，该账号将被发送到一个辅助服务器。该服务器" />
+									<Span Text="完全不会" FontAttributes="Bold" />
+									<Span Text="保存您的用户名密码，其中使用到的也仅会在内存中保留很短的一段时间，请放心使用。同时该服务器的源码在 GitHub (https://github.com/moesoha/oujiang-college-oa-fetcher) 开源，欢迎完善、审计。" />
+								</FormattedString.Spans>
+							</FormattedString>
+						</Label.FormattedText>
+					</Label>
+				</StackLayout>
 			</StackLayout>
 		</ScrollView>
 	</ContentPage.Content>

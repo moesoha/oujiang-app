@@ -8,7 +8,7 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 		public INavigation Navigation{get;set;}
 
 		public AboutViewModel(Page Page){
-			Title="设置";
+			Title="更多";
 
 			RefreshScheduleCommand=new Command(async ()=>{
 				this.btnRefreshScheduleIsEnabled=false;

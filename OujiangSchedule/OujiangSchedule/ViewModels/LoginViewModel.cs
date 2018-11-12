@@ -15,8 +15,14 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 				string username=PageContent.FindByName<Entry>("username").Text;
 				string password=PageContent.FindByName<Entry>("password").Text;
 				string captcha=PageContent.FindByName<Entry>("captcha").Text;
+				
+				if(String.IsNullOrWhiteSpace(username)||String.IsNullOrWhiteSpace(password)||String.IsNullOrWhiteSpace(captcha)){
+					lblHintVisible=true;
+					lblHintText="请完整填写所有内容";
+					return;
+				}
 
-				bool r=await Login(username,password,captcha);
+				bool r=await Login(username.Trim(),password.Trim(),captcha.Trim());
 				if(r){
 					SaveCredential(PageContent);
 					await Page.DisplayAlert("登入成功","你现在可以去更新课表了。","好的");
@@ -26,7 +32,10 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 				}
 				return;
 			});
-			ReloadCaptchaCommand=new Command(async ()=>await LoadCaptcha());
+			ReloadCaptchaCommand=new Command(async ()=>{
+				lblHintVisible=false;
+				await LoadCaptcha();
+			});
 		}
 		
 		public void LoadSavedCredential(View PageContent){
@@ -47,9 +56,7 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 		}
 
 		public async Task LoadCaptcha(){
-			lblHintVisible=false;
 			btnReloadCaptchaIsEnabled=false;
-			string temp=btnReloadCaptchaText;
 			btnReloadCaptchaText="正在加载验证码";
 			
 			try{
@@ -63,7 +70,7 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 			}
 
 			btnReloadCaptchaIsEnabled=true;
-			btnReloadCaptchaText=temp;
+			btnReloadCaptchaText="刷新验证码";
 		}
 
 		public async Task<bool> Login(string username,string password,string captcha){
