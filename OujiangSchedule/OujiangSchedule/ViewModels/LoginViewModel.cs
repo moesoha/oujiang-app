@@ -19,8 +19,10 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 				bool r=await Login(username,password,captcha);
 				if(r){
 					await SaveCredential(PageContent);
-					await Page.DisplayAlert("登陆成功","你现在可以去更新课表了。","好的");
+					await Page.DisplayAlert("登入成功","你现在可以去更新课表了。","好的");
 					await Navigation.PopAsync();
+				}else{
+					await LoadCaptcha();
 				}
 				return;
 			});
@@ -76,14 +78,14 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 					lblHintText="用户名/密码或验证码出错，请检查。";
 					lblHintVisible=true;
 				}else{
-					lblHintText="登陆成功";
-					lblHintVisible=true;
+					lblHintText="登入成功";
+					//lblHintVisible=true;
 				}
 			}catch(Exceptions.SessionTimeoutException){
 				lblHintText="验证码过期，请刷新。";
 				lblHintVisible=true;
 			}catch(Exception e){
-				lblHintText=String.Format("登陆遇到未知错误，可能是网络状况不佳。{0}",e.Message);
+				lblHintText=String.Format("遇到未知错误，可能是网络状况不佳。{0}",e.Message);
 				lblHintVisible=true;
 			}
 

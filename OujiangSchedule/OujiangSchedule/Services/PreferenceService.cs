@@ -5,7 +5,7 @@ using Tianhai.OujiangApp.Schedule;
 
 namespace Tianhai.OujiangApp.Schedule.Services{
 	public class PreferenceService:DataService{
-		public DateTime Display_FirstWeek_Sunday{get;set;}
+		private DateTime Display_FirstWeek_Sunday;
 
 		public PreferenceService(){
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
@@ -19,7 +19,7 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 		}
 
 		public async Task<DateTime> GetDisplay_FirstWeek_Sunday(){
-			if(Display_FirstWeek_Sunday==DateTime.MinValue || Display_FirstWeek_Sunday==null){
+			if(Display_FirstWeek_Sunday==null || Display_FirstWeek_Sunday==DateTime.MinValue){
 				Display_FirstWeek_Sunday=await App.PreferenceDatabase.GetDisplay_FirstWeek_Sunday();
 			}
 			return Display_FirstWeek_Sunday;
@@ -31,6 +31,7 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 		}
 
 		public int DateTime_WeekNumber(DateTime dt){
+		Console.WriteLine(Display_FirstWeek_Sunday);
 			return (int)Math.Ceiling(((dt-Display_FirstWeek_Sunday).Days+1)/7.0);
 		}
 

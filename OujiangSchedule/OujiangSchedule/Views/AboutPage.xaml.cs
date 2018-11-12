@@ -11,7 +11,7 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 		public AboutPage(){
 			InitializeComponent();
 
-			viewModel=new ViewModels.AboutViewModel();
+			viewModel=new ViewModels.AboutViewModel(this);
 			viewModel.Navigation=Navigation;
 
 			BindingContext=viewModel;
