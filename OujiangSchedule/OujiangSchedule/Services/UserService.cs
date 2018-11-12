@@ -5,14 +5,12 @@ using Tianhai.OujiangApp.Schedule;
 
 namespace Tianhai.OujiangApp.Schedule.Services{
 	public class UserService:DataService{
-		public UserService(){
-			
-		}
+		public UserService(){}
 
 		public static async Task<string> loginStartWithCaptcha(){
 			Models.GeneralReturn<Models.Responses.UserLoginStart> result=await DataFetch.get<Models.Responses.UserLoginStart>(String.Format(urlUserLoginStart,urlBase));
 			if(result.Status==200){
-				await App.PreferenceDatabase.SetToken(new Models.Preferences.Token{
+				App.PreferenceDatabase.SetToken(new Models.Preferences.Token{
 					AccessToken=result.Data.Token,
 					ValidBefore=DateTime.Now.AddMinutes(8),
 					IsLoggedIn=false
@@ -24,7 +22,7 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 		}
 
 		public static async Task<bool> loginSubmit(string username,string password,string captcha){
-			Models.Preferences.Token token=await App.PreferenceDatabase.GetToken();
+			Models.Preferences.Token token=App.PreferenceDatabase.GetToken();
 			if(token==null){
 				throw new Exceptions.SessionTimeoutException();
 			}
@@ -37,9 +35,9 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 				if(result.Data.Success){
 					token.IsLoggedIn=true;
 					token.ValidBefore=DateTime.Now.AddMinutes(39);
-					await App.PreferenceDatabase.SetToken(token);
+					App.PreferenceDatabase.SetToken(token);
 				}else{
-					await App.PreferenceDatabase.RemoveToken();
+					App.PreferenceDatabase.RemoveToken();
 				}
 				return result.Data.Success;
 			}else{

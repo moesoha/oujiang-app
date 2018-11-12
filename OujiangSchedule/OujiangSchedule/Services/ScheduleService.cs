@@ -19,7 +19,7 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 		}
 
 		public static async Task<List<Models.Lesson>> RefreshCurrentLessons(){
-			Models.Preferences.Token token=await App.PreferenceDatabase.GetToken();
+			Models.Preferences.Token token=App.PreferenceDatabase.GetToken();
 			if(token==null || !token.IsLoggedIn){
 				throw new Exceptions.SessionTimeoutException();
 			}

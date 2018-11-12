@@ -5,37 +5,19 @@ using Tianhai.OujiangApp.Schedule;
 
 namespace Tianhai.OujiangApp.Schedule.Services{
 	public class PreferenceService:DataService{
-		private DateTime Display_FirstWeek_Sunday;
-
-		public PreferenceService(){
-#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-			violenceInit();
-#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+		public static DateTime GetDisplay_FirstWeek_Sunday(){
+			return App.PreferenceDatabase.GetDisplay_FirstWeek_Sunday();
 		}
 
-		public async Task violenceInit(){
-			await GetDisplay_FirstWeek_Sunday();
-			return;
+		public static void SetDisplay_FirstWeek_Sunday(DateTime fws){
+			App.PreferenceDatabase.SetDisplay_FirstWeek_Sunday(fws);
 		}
 
-		public async Task<DateTime> GetDisplay_FirstWeek_Sunday(){
-			if(Display_FirstWeek_Sunday==null || Display_FirstWeek_Sunday==DateTime.MinValue){
-				Display_FirstWeek_Sunday=await App.PreferenceDatabase.GetDisplay_FirstWeek_Sunday();
-			}
-			return Display_FirstWeek_Sunday;
+		public static int DateTime_WeekNumber(DateTime dt){
+			return (int)Math.Ceiling(((dt-GetDisplay_FirstWeek_Sunday()).Days+1)/7.0);
 		}
 
-		public async Task SetDisplay_FirstWeek_Sunday(DateTime fws){
-			await App.PreferenceDatabase.SetDisplay_FirstWeek_Sunday(fws);
-			Display_FirstWeek_Sunday=fws;
-		}
-
-		public int DateTime_WeekNumber(DateTime dt){
-		Console.WriteLine(Display_FirstWeek_Sunday);
-			return (int)Math.Ceiling(((dt-Display_FirstWeek_Sunday).Days+1)/7.0);
-		}
-
-		public DateTime WeekNumber_DateTime(int wn){
+		public static DateTime WeekNumber_DateTime(int wn){
 			return DateTime.Now.Subtract(new TimeSpan((int)DateTime.Now.DayOfWeek+(wn-1)*7,0,0,0));
 		}
 	}

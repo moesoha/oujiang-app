@@ -19,12 +19,12 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 		protected override void OnAppearing(){
 			base.OnAppearing();
 
-			currentWeekNumber.Text=viewModel.PreferenceService.DateTime_WeekNumber(DateTime.Now).ToString();
+			currentWeekNumber.Text=Services.PreferenceService.DateTime_WeekNumber(DateTime.Now).ToString();
 		}
 
-		private async void currentWeekNumber_Completed(object sender,EventArgs e){
+		private void currentWeekNumber_Completed(object sender,EventArgs e){
 			int cwn=Convert.ToInt32(((Entry)sender).Text);
-			await viewModel.PreferenceService.SetDisplay_FirstWeek_Sunday(viewModel.PreferenceService.WeekNumber_DateTime(cwn));
+			Services.PreferenceService.SetDisplay_FirstWeek_Sunday(Services.PreferenceService.WeekNumber_DateTime(cwn));
 		}
 
 		private void currentWeekNumber_TextChanged(object sender,TextChangedEventArgs e){

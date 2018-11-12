@@ -17,7 +17,7 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 		protected override async void OnAppearing(){
 			base.OnAppearing();
 
-			await viewModel.LoadSavedCredential(Content);
+			viewModel.LoadSavedCredential(Content);
 			await viewModel.LoadCaptcha();
 		}
 	}

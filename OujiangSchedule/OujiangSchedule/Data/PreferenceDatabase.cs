@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using SQLiteNetExtensionsAsync.Extensions;
+using SQLiteNetExtensions.Extensions;
 using SQLite;
 
 namespace Tianhai.OujiangApp.Schedule.Data{
 	public class PreferenceDatabase{
-
-		readonly SQLiteAsyncConnection db;
+		readonly SQLiteConnection db;
 
 		public PreferenceDatabase(string dbPath){
-			db=new SQLiteAsyncConnection(dbPath);
-			db.CreateTableAsync<Models.Preferences.Display>().Wait();
-			db.CreateTableAsync<Models.Preferences.Token>().Wait();
-			db.CreateTableAsync<Models.Preferences.OACredential>().Wait();
+			db=new SQLiteConnection(dbPath);
+			db.CreateTable<Models.Preferences.Display>();
+			db.CreateTable<Models.Preferences.Token>();
+			db.CreateTable<Models.Preferences.OACredential>();
 		}
 
-		public async Task SetDisplay_FirstWeek_Sunday(DateTime fws){
-			List<Models.Preferences.Display> displays=await db.GetAllWithChildrenAsync<Models.Preferences.Display>();
+		public void SetDisplay_FirstWeek_Sunday(DateTime fws){
+			List<Models.Preferences.Display> displays=db.GetAllWithChildren<Models.Preferences.Display>();
 			Models.Preferences.Display display;
 			if(displays==null || displays.Count<=0){
 				display=new Models.Preferences.Display{
@@ -27,47 +26,45 @@ namespace Tianhai.OujiangApp.Schedule.Data{
 				display=displays[0];
 				display.FirstWeek_Sunday=fws;
 			}
-			await db.DeleteAllAsync<Models.Preferences.Display>();
-			await db.InsertWithChildrenAsync(display);
+			db.DeleteAll<Models.Preferences.Display>();
+			db.InsertWithChildren(display);
 		}
 
-		public async Task<DateTime> GetDisplay_FirstWeek_Sunday(){
-			List<Models.Preferences.Display> displays=await db.GetAllWithChildrenAsync<Models.Preferences.Display>();
+		public DateTime GetDisplay_FirstWeek_Sunday(){
+			List<Models.Preferences.Display> displays=db.GetAllWithChildren<Models.Preferences.Display>();
 			Models.Preferences.Display display;
 			if(displays==null || displays.Count<=0){
 				display=new Models.Preferences.Display{
 					FirstWeek_Sunday=DateTime.Now.Subtract(new TimeSpan((int)DateTime.Now.DayOfWeek,0,0,0))
 				};
-				await db.InsertWithChildrenAsync(display);
+				db.InsertWithChildren(display);
 			}else{
 				display=displays[0];
 			}
 			return display.FirstWeek_Sunday;
 		}
 
-		public async Task<Models.Preferences.Token> GetToken(){
-			List<Models.Preferences.Token> tokens=await db.GetAllWithChildrenAsync<Models.Preferences.Token>();
+		public Models.Preferences.Token GetToken(){
+			List<Models.Preferences.Token> tokens=db.GetAllWithChildren<Models.Preferences.Token>();
 			Models.Preferences.Token token=null;
 			if(tokens==null || tokens.Count<=0 || tokens[0].ValidBefore<=DateTime.Now){
-				//token=new Models.Preferences.Token();
-				//await db.InsertWithChildrenAsync(token);
-				await db.DeleteAllAsync<Models.Preferences.Token>();
+				db.DeleteAll<Models.Preferences.Token>();
 			}else{
 				token=tokens[0];
 			}
 			return token;
 		}
 
-		public async Task SetToken(Models.Preferences.Token token){
-			await db.InsertOrReplaceWithChildrenAsync(token);
+		public void SetToken(Models.Preferences.Token token){
+			db.InsertOrReplaceWithChildren(token);
 		}
 
-		public async Task RemoveToken(){
-			await db.DeleteAllAsync<Models.Preferences.Token>();
+		public void RemoveToken(){
+			db.DeleteAll<Models.Preferences.Token>();
 		}
 
-		public async Task<Models.Preferences.OACredential> GetOACredential(){
-			var result=await db.GetAllWithChildrenAsync<Models.Preferences.OACredential>();
+		public Models.Preferences.OACredential GetOACredential(){
+			var result=db.GetAllWithChildren<Models.Preferences.OACredential>();
 			if(result==null || result.Count<=0){
 				return null;
 			}else{
@@ -75,12 +72,12 @@ namespace Tianhai.OujiangApp.Schedule.Data{
 			}
 		}
 
-		public async Task SetOACredential(Models.Preferences.OACredential credential){
-			await db.InsertOrReplaceWithChildrenAsync(credential);
+		public void SetOACredential(Models.Preferences.OACredential credential){
+			db.InsertOrReplaceWithChildren(credential);
 		}
 
-		public async Task RemoveOACredential(){
-			await db.DeleteAllAsync<Models.Preferences.OACredential>();
+		public void RemoveOACredential(){
+			db.DeleteAll<Models.Preferences.OACredential>();
 		}
 	}
 }

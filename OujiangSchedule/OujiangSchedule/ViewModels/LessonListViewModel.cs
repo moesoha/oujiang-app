@@ -53,8 +53,8 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 
 			IsBusy=true;
 			try{
-				firstWeek_Sunday=await PreferenceService.GetDisplay_FirstWeek_Sunday();
-				currentWeek_Number=PreferenceService.DateTime_WeekNumber(DateTime.Now);
+				firstWeek_Sunday=Services.PreferenceService.GetDisplay_FirstWeek_Sunday();
+				currentWeek_Number=Services.PreferenceService.DateTime_WeekNumber(DateTime.Now);
 
 				Lessons.Clear();
 				var lessons=await Services.ScheduleService.GetCurrentLessons();
