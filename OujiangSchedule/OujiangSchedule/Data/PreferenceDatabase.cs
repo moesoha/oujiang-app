@@ -24,7 +24,7 @@ namespace Tianhai.OujiangApp.Schedule.Data{
 		}
 
 		public string GetParam(string key){
-			var r=db.Get<Models.Preferences.Param>(key);
+			var r=db.Find<Models.Preferences.Param>(key);
 			return r==null?null:r.Value;
 		}
 

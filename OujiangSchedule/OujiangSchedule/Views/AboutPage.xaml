@@ -40,6 +40,7 @@
 		<ScrollView Grid.Row="1">
 			<StackLayout Orientation="Vertical" Padding="40,40,40,40" Spacing="10">
 				<Button Margin="0,10,0,0" Text="更新课表" Command="{Binding RefreshScheduleCommand}" IsEnabled="{Binding btnRefreshScheduleIsEnabled}" BackgroundColor="{StaticResource Primary}" TextColor="White" />
+				<Button Margin="0,10,0,0" Text="Test Button" Command="{Binding TestCommand}" IsVisible="True" />
 			</StackLayout>
 		</ScrollView>
 	</Grid>

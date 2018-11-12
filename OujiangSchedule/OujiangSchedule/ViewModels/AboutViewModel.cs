@@ -25,9 +25,20 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 				this.btnRefreshScheduleIsEnabled=true;
 				return;
 			});
-		}
 
+			TestCommand=new Command(async ()=>{
+				try{
+					var result=await Services.CalendarService.ResetCalendar();
+					await Page.DisplayAlert("Calendar ExtID",result,"OK");
+				}catch(Exception e){
+					await Page.DisplayAlert("Awww",e.Message,"OK");
+					throw e;
+				}
+			});
+		}
+		
 		public ICommand RefreshScheduleCommand{get;}
+		public ICommand TestCommand{get;}
 
 		private bool _btnRefreshScheduleIsEnabled=true;
 		public bool btnRefreshScheduleIsEnabled{

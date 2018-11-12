@@ -15,7 +15,7 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 
 			Calendar cal=new Calendar{
 				AccountName=String.Format("{0}@ojjx.wzu.edu.cn",username),
-				Name="瓯江课表"
+				Name=String.Format("{0}@ojjx.wzu.edu.cn",username)
 			};
 
 			await CrossCalendars.Current.AddOrUpdateCalendarAsync(cal);
