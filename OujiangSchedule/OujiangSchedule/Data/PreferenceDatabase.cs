@@ -82,7 +82,7 @@ namespace Tianhai.OujiangApp.Schedule.Data{
 			db.DeleteAll<Models.Preferences.OACredential>();
 		}
 
-		public Dictionary<int,Models.Preferences.TimeScheduleSessionUnit> GetTimeSchedule(){
+		public Dictionary<int,List<TimeSpan>> GetTimeSchedule(){
 			var result=db.GetAllWithChildren<Models.Preferences.TimeSchedule>();
 			if(result==null || result.Count<=0){
 				return ResetTimeSchedule();
@@ -91,31 +91,31 @@ namespace Tianhai.OujiangApp.Schedule.Data{
 			}
 		}
 
-		public void SetTimeSchedule(Dictionary<int,Models.Preferences.TimeScheduleSessionUnit> credential){
+		public void SetTimeSchedule(Dictionary<int,List<TimeSpan>> table){
 			db.InsertOrReplaceWithChildren(new Models.Preferences.TimeSchedule{
-				Table=defaultTimeTable
+				Table=table
 			});
 		}
 
-		public Dictionary<int,Models.Preferences.TimeScheduleSessionUnit> ResetTimeSchedule(){
+		public Dictionary<int,List<TimeSpan>> ResetTimeSchedule(){
 			db.DeleteAll<Models.Preferences.TimeSchedule>();
 			SetTimeSchedule(defaultTimeTable);
 			return defaultTimeTable;
 		}
 
-		private static Dictionary<int, Models.Preferences.TimeScheduleSessionUnit> defaultTimeTable=new Dictionary<int, Models.Preferences.TimeScheduleSessionUnit>{
-			{1,new Models.Preferences.TimeScheduleSessionUnit{Session=1,Start=new TimeSpan(08,10,00),End=new TimeSpan(08,55,00)}},
-			{2,new Models.Preferences.TimeScheduleSessionUnit{Session=2,Start=new TimeSpan(09,05,00),End=new TimeSpan(09,50,00)}},
-			{3,new Models.Preferences.TimeScheduleSessionUnit{Session=3,Start=new TimeSpan(10,10,00),End=new TimeSpan(10,55,00)}},
-			{4,new Models.Preferences.TimeScheduleSessionUnit{Session=4,Start=new TimeSpan(11,05,00),End=new TimeSpan(11,50,00)}},
-			{5,new Models.Preferences.TimeScheduleSessionUnit{Session=5,Start=new TimeSpan(13,30,00),End=new TimeSpan(14,15,00)}},
-			{6,new Models.Preferences.TimeScheduleSessionUnit{Session=6,Start=new TimeSpan(14,25,00),End=new TimeSpan(15,10,00)}},
-			{7,new Models.Preferences.TimeScheduleSessionUnit{Session=7,Start=new TimeSpan(15,30,00),End=new TimeSpan(16,15,00)}},
-			{8,new Models.Preferences.TimeScheduleSessionUnit{Session=8,Start=new TimeSpan(16,25,00),End=new TimeSpan(17,10,00)}},
-			{9,new Models.Preferences.TimeScheduleSessionUnit{Session=9,Start=new TimeSpan(18,30,00),End=new TimeSpan(19,15,00)}},
-			{10,new Models.Preferences.TimeScheduleSessionUnit{Session=10,Start=new TimeSpan(19,25,00),End=new TimeSpan(20,10,00)}},
-			{11,new Models.Preferences.TimeScheduleSessionUnit{Session=11,Start=new TimeSpan(20,30,00),End=new TimeSpan(21,15,00)}},
-			{12,new Models.Preferences.TimeScheduleSessionUnit{Session=12,Start=new TimeSpan(21,25,00),End=new TimeSpan(22,10,00)}}
+		private static Dictionary<int,List<TimeSpan>> defaultTimeTable=new Dictionary<int,List<TimeSpan>>{
+			{1,new List<TimeSpan>{new TimeSpan(08,10,00),new TimeSpan(08,55,00)}},
+			{2,new List<TimeSpan>{new TimeSpan(09,05,00),new TimeSpan(09,50,00)}},
+			{3,new List<TimeSpan>{new TimeSpan(10,10,00),new TimeSpan(10,55,00)}},
+			{4,new List<TimeSpan>{new TimeSpan(11,05,00),new TimeSpan(11,50,00)}},
+			{5,new List<TimeSpan>{new TimeSpan(13,30,00),new TimeSpan(14,15,00)}},
+			{6,new List<TimeSpan>{new TimeSpan(14,25,00),new TimeSpan(15,10,00)}},
+			{7,new List<TimeSpan>{new TimeSpan(15,30,00),new TimeSpan(16,15,00)}},
+			{8,new List<TimeSpan>{new TimeSpan(16,25,00),new TimeSpan(17,10,00)}},
+			{9,new List<TimeSpan>{new TimeSpan(18,30,00),new TimeSpan(19,15,00)}},
+			{10,new List<TimeSpan>{new TimeSpan(19,25,00),new TimeSpan(20,10,00)}},
+			{11,new List<TimeSpan>{new TimeSpan(20,30,00),new TimeSpan(21,15,00)}},
+			{12,new List<TimeSpan>{new TimeSpan(21,25,00),new TimeSpan(22,10,00)}}
 		};
 	}
 }

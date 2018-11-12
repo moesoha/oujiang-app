@@ -8,15 +8,9 @@ namespace Tianhai.OujiangApp.Schedule.Models.Preferences{
 		[PrimaryKey]
 		public int Id{get;set;}=1;
 		
+		// session => [Start,End]
 		[TextBlob("TextBlobTable")]
-		// session => TimeScheduleSessionUnit
-		public Dictionary<int,TimeScheduleSessionUnit> Table{get;set;}
-	}
-	public class TimeScheduleSessionUnit{
-		public int Session{get;set;}
-
-		// TimeSpan from 00:00:00 of a day
-		public TimeSpan Start{get;set;}
-		public TimeSpan End{get;set;}
+		public Dictionary<int,List<TimeSpan>> Table{get;set;}
+		public string TextBlobTable{get;set;}
 	}
 }

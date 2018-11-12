@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Tianhai.OujiangApp.Schedule.Views.PreferenceTimeSchedulePage" Title="{Binding Title}">
+	<ContentPage.ToolbarItems>
+		<ToolbarItem Text="保存" Clicked="Submit_Clicked">
+			<ToolbarItem.Icon>
+				<OnPlatform x:TypeArguments="FileImageSource">
+					<On Platform="UWP" Value="add.png"/>
+					<!-- !!! -->
+				</OnPlatform>
+			</ToolbarItem.Icon>
+		</ToolbarItem>
+	</ContentPage.ToolbarItems>
+	<ScrollView>
+		<StackLayout Spacing="10" Padding="16,40">
+			<StackLayout x:Name="TimeTableContainer" Spacing="8"></StackLayout>
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

@@ -7,6 +7,7 @@
 					<Label FontSize="12" Text="这周是本学期第几周" />
 					<Entry x:Name="currentWeekNumber" Keyboard="Numeric" Completed="currentWeekNumber_Completed" TextChanged="currentWeekNumber_TextChanged" MaxLength="2"></Entry>
 				</StackLayout>
+				<Button Margin="0,10,0,0" Text="时间表修改" Command="{Binding OpenTimeScheduleCommand}" />
 			</StackLayout>
 		</ScrollView>
 	</ContentPage.Content>

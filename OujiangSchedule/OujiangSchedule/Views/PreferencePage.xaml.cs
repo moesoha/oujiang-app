@@ -13,7 +13,7 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 		public PreferencePage(){
 			InitializeComponent();
 
-			BindingContext=viewModel=new PreferenceViewModel();
+			BindingContext=viewModel=new PreferenceViewModel(this);
 		}
 
 		protected override void OnAppearing(){
