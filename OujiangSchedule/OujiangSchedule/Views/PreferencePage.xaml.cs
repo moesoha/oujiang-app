@@ -24,7 +24,7 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 
 		private void currentWeekNumber_Completed(object sender,EventArgs e){
 			int cwn=Convert.ToInt32(((Entry)sender).Text);
-			Services.PreferenceService.SetDisplay_FirstWeek_Sunday(Services.PreferenceService.WeekNumber_DateTime(cwn));
+			Services.PreferenceService.SetDisplay_FirstWeek_Sunday(DateTime.Now.Subtract(new TimeSpan((int)DateTime.Now.DayOfWeek+(cwn-1)*7,0,0,0)));
 		}
 
 		private void currentWeekNumber_TextChanged(object sender,TextChangedEventArgs e){

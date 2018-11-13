@@ -16,9 +16,5 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 		public static int DateTime_WeekNumber(DateTime dt){
 			return (int)Math.Ceiling(((dt-GetDisplay_FirstWeek_Sunday()).Days+1)/7.0);
 		}
-
-		public static DateTime WeekNumber_DateTime(int wn){
-			return DateTime.Now.Subtract(new TimeSpan((int)DateTime.Now.DayOfWeek+(wn-1)*7,0,0,0));
-		}
 	}
 }
