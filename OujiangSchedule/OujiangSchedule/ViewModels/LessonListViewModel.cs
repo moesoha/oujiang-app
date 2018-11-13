@@ -13,7 +13,7 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 		public ObservableCollection<Models.Lesson> Lessons{get;set;}
 		public Command LoadLessonsCommand{get;set;}
 		
-		private DateTime firstWeek_Sunday=Services.PreferenceService.GetDisplay_FirstWeek_Sunday();
+		public DateTime firstWeek_Sunday{get;set;}=Services.PreferenceService.GetDisplay_FirstWeek_Sunday();
 		public DateTime currentWeek_Sunday{
 			get{
 				return firstWeek_Sunday.AddDays((currentWeek_Number-1)*7);

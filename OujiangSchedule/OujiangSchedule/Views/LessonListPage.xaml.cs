@@ -33,17 +33,22 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 
 		protected override void OnAppearing(){
 			base.OnAppearing();
-			
+
+			var fws=Services.PreferenceService.GetDisplay_FirstWeek_Sunday();
+			if(!fws.Equals(viewModel.firstWeek_Sunday)){
+				viewModel.firstWeek_Sunday=fws;
+				viewModel.currentWeek_Number=Services.PreferenceService.DateTime_WeekNumber(DateTime.Now);
+			}
 			this.Content=gridNow=CreateWeekGrid(viewModel.currentWeek_Sunday);
 			viewModel.LoadLessonsCommand.Execute(null);
 		}
 
-		void PrevWeek_Clicked(object sender, EventArgs e){
+		private void PrevWeek_Clicked(object sender, EventArgs e){
 			viewModel.currentWeek_Number--;
 			RefreshTable();
 		}
 
-		void NextWeek_Clicked(object sender, EventArgs e){
+		private void NextWeek_Clicked(object sender, EventArgs e){
 			viewModel.currentWeek_Number++;
 			RefreshTable();
 		}
@@ -70,7 +75,7 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 				var thisButton=new Button{
 					Text=String.Format("{0}\n{1}",o.Name,o.Place),
 					Padding=new Thickness(6),
-					FontSize=Device.GetNamedSize(NamedSize.Small,typeof(Button))
+					FontSize=Device.GetNamedSize(NamedSize.Micro,typeof(Button))
 				};
 				thisButton.BindingContext=o;
 				thisButton.Clicked+=this.ThisButton_Clicked;
