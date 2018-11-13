@@ -4,8 +4,7 @@
 		<ToolbarItem Text="保存" Clicked="Submit_Clicked">
 			<ToolbarItem.Icon>
 				<OnPlatform x:TypeArguments="FileImageSource">
-					<On Platform="UWP" Value="add.png"/>
-					<!-- !!! -->
+					<On Platform="UWP" Value="Assets/save.png" />
 				</OnPlatform>
 			</ToolbarItem.Icon>
 		</ToolbarItem>

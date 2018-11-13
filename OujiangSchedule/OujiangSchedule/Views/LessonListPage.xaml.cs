@@ -70,7 +70,7 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 				var thisButton=new Button{
 					Text=String.Format("{0}\n{1}",o.Name,o.Place),
 					Padding=new Thickness(6),
-					FontSize=11
+					FontSize=Device.GetNamedSize(NamedSize.Small,typeof(Button))
 				};
 				thisButton.BindingContext=o;
 				thisButton.Clicked+=this.ThisButton_Clicked;

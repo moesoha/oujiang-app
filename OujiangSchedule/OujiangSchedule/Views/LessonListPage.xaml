@@ -4,14 +4,14 @@
 		<ToolbarItem Text="上周" Clicked="PrevWeek_Clicked">
 			<ToolbarItem.Icon>
 				<OnPlatform x:TypeArguments="FileImageSource">
-					<On Platform="UWP" Value="add.png"/> <!-- !!! -->
+					<On Platform="UWP" Value="Assets/left-arrow.png" />
 				</OnPlatform>
 			</ToolbarItem.Icon>
 		</ToolbarItem>
 		<ToolbarItem Text="下周" Clicked="NextWeek_Clicked">
 			<ToolbarItem.Icon>
 				<OnPlatform x:TypeArguments="FileImageSource">
-					<On Platform="UWP" Value="add.png"/> <!-- !!! -->
+					<On Platform="UWP" Value="Assets/right-arrow.png" />
 				</OnPlatform>
 			</ToolbarItem.Icon>
 		</ToolbarItem>
