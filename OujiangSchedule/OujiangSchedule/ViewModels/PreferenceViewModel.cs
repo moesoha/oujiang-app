@@ -9,10 +9,22 @@ namespace Tianhai.OujiangApp.Schedule.ViewModels{
 			Title="参数管理";
 
 			OpenTimeScheduleCommand=new Command(async ()=>{
+				btnOpenTimeScheduleIsEnabled=false;
 				await Page.Navigation.PushAsync(new Views.PreferenceTimeSchedulePage());
+				btnOpenTimeScheduleIsEnabled=true;
 			});
 		}
 
 		public ICommand OpenTimeScheduleCommand{get;set;}
+		private bool _btnOpenTimeScheduleIsEnabled=true;
+		public bool btnOpenTimeScheduleIsEnabled{
+			get{
+				return _btnOpenTimeScheduleIsEnabled;
+			}
+			set{
+				_btnOpenTimeScheduleIsEnabled=value;
+				OnPropertyChanged();
+			}
+		}
 	}
 }
