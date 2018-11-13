@@ -11,7 +11,7 @@ namespace Tianhai.OujiangApp.Schedule.Views{
 		public CalendarSyncPage(){
 			InitializeComponent();
 
-			BindingContext=viewModel=new ViewModels.CalendarSyncViewModel();
+			BindingContext=viewModel=new ViewModels.CalendarSyncViewModel(this);
 		}
 	}
 }

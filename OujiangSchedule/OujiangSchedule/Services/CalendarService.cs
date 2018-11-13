@@ -7,12 +7,12 @@ using Plugin.Calendars.Abstractions;
 namespace Tianhai.OujiangApp.Schedule.Services{
 	public class CalendarService{
 		public static string GetAccountName(){
-			string username=App.PreferenceDatabase.GetOACredential().Username;
-			if(String.IsNullOrWhiteSpace(username)){
-				throw new Exception("没有找到登陆过的账号");
+			Models.Preferences.OACredential credential=App.PreferenceDatabase.GetOACredential();
+			if(credential==null){
+				throw new Exceptions.NotLoggedInException("没有找到登陆过的账号");
 			}
 
-			return String.Format("{0}@ojjx.wzu.edu.cn",username);
+			return String.Format("{0}@ojjx.wzu.edu.cn",credential.Username);
 		}
 
 		public static async Task<Calendar> CreateCalendar(string accountName){
@@ -65,12 +65,12 @@ namespace Tianhai.OujiangApp.Schedule.Services{
 			return calendarEventReminders;
 		}
 
-		public static async Task<CalendarEvent> AddEvent(Calendar calendar,string eventName,string eventLocation,string eventDescription,DateTime eventTimeStart,DateTime eventTimeEnd,List<CalendarEventReminder> eventReminders){
+		public static async Task<CalendarEvent> AddEvent(Calendar calendar,string eventName,string eventLocation,string eventDescription,DateTime eventTimeStart,DateTime eventTimeEnd,List<CalendarEventReminder> eventReminders,bool eventIsAllDay=false){
 			CalendarEvent calEvent=new CalendarEvent{
 				Name=eventName,
 				Location=eventLocation,
 				Description=eventDescription,
-				AllDay=false,
+				AllDay=eventIsAllDay,
 				Start=eventTimeStart,
 				End=eventTimeEnd,
 				Reminders=eventReminders

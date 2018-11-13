@@ -10,15 +10,41 @@
 	<ContentPage.Content>
 		<ScrollView>
 			<StackLayout Orientation="Vertical" Padding="16,40,16,40" Spacing="10">
-				<StackLayout Spacing="3">
-					<Label FontSize="12" Text="用户名(学号)" />
-					<Entry x:Name="username" />
+				<StackLayout Spacing="16" IsVisible="{Binding isOnHint}">
+					<Label FontSize="Medium">
+						<Label.FormattedText>
+							<FormattedString>
+								<FormattedString.Spans>
+									<Span Text="这个功能用来将您的课程表同步到系统日历中，利用系统日历来提醒你哪一节课即将开始。" />
+								</FormattedString.Spans>
+							</FormattedString>
+						</Label.FormattedText>
+					</Label>
+					<Label FontSize="Medium">
+						<Label.FormattedText>
+							<FormattedString>
+								<FormattedString.Spans>
+									<Span Text="请注意，本应用的同步模式为全新同步。也就是说，如果您之前同步到日历之后，您对日程有做更改，这些更改将会全部丢失。" />
+								</FormattedString.Spans>
+							</FormattedString>
+						</Label.FormattedText>
+					</Label>
+					<Label FontSize="Medium">
+						<Label.FormattedText>
+							<FormattedString>
+								<FormattedString.Spans>
+									<Span Text="日历同步功能依赖“时间表”和“当前周”来计算时间。请确保“参数”中设置的参数都是正确的。" />
+								</FormattedString.Spans>
+							</FormattedString>
+						</Label.FormattedText>
+					</Label>
+					<Button Margin="0,10,0,0" Command="{Binding SwitchHintToOperationCommand}" Text="我知道了" />
 				</StackLayout>
-				<StackLayout Spacing="3">
-					<Label FontSize="12" Text="密码" />
-					<Entry x:Name="password" IsPassword="True" />
+				<StackLayout Spacing="3" IsVisible="{Binding isOnOperation}">
+					<Label FontSize="12" Text="上课前多久推送提醒 (小时:分钟)" />
+					<TimePicker Format="HH:mm" x:Name="remindBefore" Time="00:15:00" />
 				</StackLayout>
-				<StackLayout Spacing="3">
+				<StackLayout Spacing="3" IsVisible="{Binding isOnOperation}">
 					<Button Margin="0,10,0,0" Command="{Binding SyncCommand}" IsEnabled="{Binding btnSyncIsEnabled}" BackgroundColor="{StaticResource Primary}" TextColor="White">
 						<Button.Text>
 							同步
